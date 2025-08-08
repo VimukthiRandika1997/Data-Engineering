@@ -2,6 +2,8 @@
 
 ### - Set the GCP credential keys - ###
 export GOOGLE_APPLICATION_CREDENTIALS="/media/vimukthi/Vimax4/Repos/Keys/learner-gcp-key.json"
+# Refresh token/session, and verify authentication
+gcloud auth application-default login
 
 ### - Create the resources - ###
 # 01. initializing
