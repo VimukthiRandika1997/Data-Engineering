@@ -2,6 +2,8 @@
 
 Learning and Implementing data pipelines
 
+![alt text](assets/preview_image.png)
+
 ## MLOps
 
 - [MLFlow](/MLOps/MLFlow/README.md): For managing Exeperimental Tracking
