@@ -1,27 +1,5 @@
-# Google Cloud Networking Fundamentals
+# Basic Terraform Project Structure For Google Cloud
 
-## What is a VPC in Google Cloud?
-
-A Virtual Private Cloud (VPC) serves as your isolated network environment within Google Cloud:
-
-- 🔒 Network Isolation: Complete separation from other projects and tenants
-- 🛡️ Security Control: Fine-grained access control and firewall rules
-- 🌍 Global Resource: Automatically spans multiple regions worldwide
-- 📍 IP Management: Custom IP addressing, subnets, and routing control
-- 🔗 Connectivity: VPN, interconnect, and peering capabilities
-
-
-## What is a Subnet in Google Cloud ?
-
-Subnets are regional network segments within your network
-
-Subnets are regional network segments within your VPC that:
-
-- Define IP address ranges (CIDR blocks) for your resources
-- Enable regional resource deployment and isolation
-- Provide traffic segmentation and security boundaries
-- Support private Google API access for enhanced security
-- Allow custom routing and firewall rule application
 
 ## Setting up the Environment
 
