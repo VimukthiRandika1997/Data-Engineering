@@ -22,22 +22,25 @@ The project structure should be like this:
 ```bash
 IaC_automation
 └── .github/workflows
+    └── boostrap.yaml       # defines the workflow for creating remote backend bucket ( this is triggered manually )
     └── terraform.yaml      # defines the automated workflow, edit this file for your own use-case
 └── environments
     └── dev
-        ├── backends.tf     # defines the backend for storing Terraform state
+        ├── boostrap            # defines the main configuration for creating GCE instance
+            ├── main.tf         # defines the main configuration for creating remote backend bucket
+            ├── terraform.tfvars    # defines the arguments to be used for the variables
+            ├── variables.tf        # defines input variables used in Terraform configuration 
+            ├── versions.tf         # defines the required Terraform version
         ├── main.tf         # defines the main configuration for creating GCE instance
         ├── networking.tf   # defines the newtworking related things: VPC, Subnets, Firewalls, etc
         ├── outputs.tf      # defines the outputs to be shared from Terraform remote state
         ├── providers.tf    # defines the GCP as the provider
-        ├── storage.tf      # defines cloud-buckets to be used: Terraform remote-state, general cloud buckets
+        ├── storage.tf      # defines cloud-buckets to be used: general cloud buckets
         ├── variables.tf    # defines input variables used in Terraform configuration
         └── versions.tf     # defines the required Terraform version
 └── scripts
-    └── create_gcp_service_account.sh # create a new GCP service account locally to be used for Terraform
-    └── create_project_structure.sh   # Optional: recreate the project-structure
+    └── create_gcp_service_account.sh # create a new GCP service account locally to be used by Terraform with Github-Actions
 └── env.sample                        # sample ENV variables to be used
-└── env                               # ENV variables to be used
 ```
 
 ## Workflow
@@ -50,7 +53,7 @@ This workflow contains several jobs and steps to enforce code quality and deploy
 
 3. **Terraform Format**: Ensures your Terraform code adheres to the expected format and style.
 
-4. **Terraform Init**: Initializes your Terraform working directory, setting up backend storage and downloading required     provider plugins.
+4. **Terraform Init**: Initializes your Terraform working directory, setting up remote backend storage and downloading required provider plugins.
 
 5. **Terraform Validate**: Validates the Terraform configuration for syntax and internal consistency.
 
@@ -87,29 +90,39 @@ This workflow contains several jobs and steps to enforce code quality and deploy
 
 2. Create a GCP service account
 
-    - This creates a service account to be used during CI/CD pipeline (Github Action): `terraform-sa-key.json`
+    1. Update the `.env` file
+    2. Run the below commandss
 
     ```bash
     cd scripts/
+    cp .env.sample .env
+    # remove existing ENV variables
+    sed -i '/^project_id=/d' .env
+    # Append new value for ENV variables
+    echo "project_id=<your_project_id>" >> .env
+
+    # Create a service-account for automation
     bash create_gcp_service_account.sh
     ```
 
-3. Create the basic projcet structure and add it to the Github repository
+    - This creates a service account to be used during CI/CD pipeline (Github Action): `scripts/terraform-sa-key.json`
 
-    - Create a github repository and add the project structure
-    - Update the `.env` file
+3. Create the basic projcet structure like `Iac_automation` or copy the files to your github repository
 
-    ```bash
-    cd scripts/
-    bash create_project_structure.sh
-    ```
+    1. Create a github repository and add or copy the project structure
+    2. Update the `project_id`in both `environments/dev/boostrap/terraform.tfvars` and `environments/dev/terraform.tfvars`
 
-4. Set the `ENV` variables in `Github` to trigger the workflow:
-    - `TF_ENVIRONMENT`: set environment name to be used: `dev` or `prod` ( currently we only have the dev )
-    - `TF_VAR_GCP_CREDENTIALS`: GCP service account JSON key
-    - `GITHUB_TOKEN`: Your Github account's access token
+4. Set the `ENV` variables in Github to trigger the workflow:
+    - This can be found in `https://github.com/<your_github_username>/<your_repo_name>/settings/secrets/actions`
+        - `TF_VAR_GCP_CREDENTIALS`: GCP service account JSON key
+        - `STATE_BUCKET`: GCS bucket name for remote-backend of terraform, this is the `bucket_name` you have set in `environments/dev/boostrap/terraform.tfvars` 
+        - `GITHUB_TOKEN`: Your Github account's access token
 
-5. Trigger the workflow
+5. Manually trigger the **boostrap-workflow** to create the GCS bucket for the remote backend
+    - This has to be created manually as terraform itself can not hanlde this during the automation
+    - To trigger this, go to the Github and trigger Github Actions tab button
+
+6. Trigger the automated workflow by performing following actions
 
     1. Make some changes in the repository: 
         - add, change or remove cloud resources from terraform files

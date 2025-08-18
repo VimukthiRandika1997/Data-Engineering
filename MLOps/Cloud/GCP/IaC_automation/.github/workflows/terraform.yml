@@ -1,4 +1,4 @@
-name: "Dev-Terraform"
+name: "Dev-Terraform GCP Deploy"
 
 on:
   push:
@@ -24,12 +24,12 @@ jobs:
       TF_ENVIRONMENT: dev
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.12.2
+          terraform_version: 1.5.0
 
       - name: Terraform Format
         id: fmt
@@ -39,17 +39,21 @@ jobs:
 
       - name: Authenticate to Google Cloud
         id: auth
-        uses: google-github-actions/auth@v1
+        uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.TF_VAR_GCP_CREDENTIALS }}
 
-      - name: Terraform Init
+      - name: Terraform Init with Remote Backend
         id: init
         env:
           TF_VAR_GCP_CREDENTIALS: ${{ secrets.TF_VAR_GCP_CREDENTIALS }}
         run: |
           cd environments/${{ env.TF_ENVIRONMENT }}
-          terraform init
+          terraform init \
+            -backend-config="bucket=${{ secrets.STATE_BUCKET }}" \
+            -backend-config="prefix=terraform/state/${{ env.TF_ENVIRONMENT }}"
+
+
       
       - name: Terraform Validate
         id: validate

@@ -10,6 +10,15 @@ variable "region" {
 }
 
 variable "environment" {
-  description = "Environment to be considered"
   type      = string
+}
+
+variable "bucket_name" {
+  description = "Name of the GCS bucket for Terraform state"
+  type        = string
+}
+
+variable "terraform_sa_email" {
+  description = "Email of the Terraform service account"
+  type        = string
 }
