@@ -1,5 +1,3 @@
 project_id        = "your-project-id"
 region            = "us-central1"
 environment       = "dev"
-bucket_name       = "${project_id}-dev-terraform-state"
-terraform_sa_email = "terraform@${project_id}.iam.gserviceaccount.com"

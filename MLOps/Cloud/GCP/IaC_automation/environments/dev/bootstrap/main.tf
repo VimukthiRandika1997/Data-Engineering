@@ -3,9 +3,14 @@ provider "google" {
   region  = var.region
 }
 
+locals {
+  bucket_name = "${var.project_id}-dev-terraform-state"
+  terraform_sa_email = "terraform@${var.project_id}.iam.gserviceaccount.com"
+}
+
 # GCS bucket for Terraform remote state (remote backend)
 resource "google_storage_bucket" "terraform_state" {
-  name                        = var.bucket_name
+  name                        = local.bucket_name
   location                    = var.region
   storage_class               = "STANDARD"
   # Uniform bucket-level access for better security
@@ -41,5 +46,5 @@ resource "google_storage_bucket" "terraform_state" {
 resource "google_storage_bucket_iam_member" "terraform_sa" {
   bucket = google_storage_bucket.terraform_state.name
   role   = "roles/storage.objectAdmin"
-  member = "serviceAccount:${var.terraform_sa_email}"
+  member = "serviceAccount:${local.terraform_sa_email}"
 }
