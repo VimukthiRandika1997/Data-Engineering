@@ -1,0 +1,13 @@
+{
+  "BigQuery Schema": [
+    { "name": "first_name", "type": "STRING" },
+    { "name": "last_name", "type": "STRING" },
+    { "name": "job_title", "type": "STRING" },
+    { "name": "department", "type": "STRING" },
+    { "name": "email", "type": "STRING" },
+    { "name": "address", "type": "STRING" },
+    { "name": "phone_number", "type": "STRING" },
+    { "name": "salary", "type": "STRING" }, 
+    { "name": "password", "type": "STRING" }
+  ]
+}
