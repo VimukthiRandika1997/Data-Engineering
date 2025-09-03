@@ -30,4 +30,4 @@ bash trigger_pipeline.sh destroy # for removing files from GCS bucket
 
 5. Visit BigQuery section in GCP
 
-[Result](/MLOps/Cloud/GCP/gcp_dataflow/gcs_to_bigquery/assets/GCP_Dataflow_intro.png)
+![Result](/MLOps/Cloud/GCP/gcp_dataflow/gcs_to_bigquery/assets/GCP_Dataflow_intro.png)
