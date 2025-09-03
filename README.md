@@ -12,6 +12,7 @@ Learning and Implementing data pipelines
 - [Automating the deployment of Infrastructure with GCP](/MLOps/Cloud/GCP/IaC_automation/README.md): For Deploying GCP resources with Terraform and Github Actions
 - [Secure Compute Engine Instance with VPC, Subnets, Cloud NAT and IAP](/MLOps/Cloud/GCP/private_compute_instance/README.md): For Deploying Secure GCP resources -> Compute Engine
 <!-- - [Deploying ML Models with Docker and Kubernets on GCP](/MLOps/Cloud/GCP/deploying_ml_models_with_kubernetes/README.md): For Deploying ML Models to the Cloud -->
+- [Google Dataflow Job Deployment with Terraform: GCS to BigQuery](/MLOps/Cloud/GCP/gcp_dataflow/gcs_to_bigquery/README.md): For Loading data from GCS bucket to BigQuery
 
 ## Tools
 
