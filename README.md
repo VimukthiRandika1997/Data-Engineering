@@ -20,3 +20,5 @@ Learning and Implementing data pipelines
 
 
 ## Pipelines
+
+- [Local Apache Airflow Setup with GCP](/pipelines/gcp_airflow_dag/README.md): For running Apache Airflow locally with GCP
