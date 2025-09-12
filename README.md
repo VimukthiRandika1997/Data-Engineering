@@ -23,3 +23,4 @@ Learning and Implementing data pipelines
 ## Pipelines
 
 - [Local Apache Airflow Setup with GCP](/pipelines/gcp_airflow_dag/README.md): For running Apache Airflow locally with GCP
+- [Local Modular ETL Pipeline](/pipelines/local_retail_etl_pipeline/README.md): For running modualr ETL pipelines locally
