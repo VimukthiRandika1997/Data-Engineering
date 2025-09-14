@@ -1,0 +1,5 @@
+project_id = "your_gcp_project_id"
+region = "us-central"
+zone = "us-central-a"
+db_password = "your_password"
+environment = "dev"
