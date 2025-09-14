@@ -13,11 +13,12 @@ Learning and Implementing data pipelines
 - [Secure Compute Engine Instance with VPC, Subnets, Cloud NAT and IAP](/MLOps/Cloud/GCP/private_compute_instance/README.md): For Deploying Secure GCP resources -> Compute Engine
 <!-- - [Deploying ML Models with Docker and Kubernets on GCP](/MLOps/Cloud/GCP/deploying_ml_models_with_kubernetes/README.md): For Deploying ML Models to the Cloud -->
 - [Google Dataflow Job Deployment with Terraform: GCS to BigQuery](/MLOps/Cloud/GCP/gcp_dataflow/gcs_to_bigquery/README.md): For Loading data from GCS bucket to BigQuery
+- [3 Tier Web Application Infrastructure with GCP](/MLOps/Cloud/GCP/3-tier_web_application_architecture/README.md): For setting up the infrastructure for running modern web-appf
 
 ## Tools
 
 - [Terraform](/tools/terraform/README.md): For Infrastructure as a Code
-- [Apache Airflow](/tools/airflow/install_with_docker/README.md): For Orchestrating Pipelines
+- [Apache Airflow](/tools/airflow/1-intro/README.md): For Orchestrating Pipelines
 
 
 ## Pipelines
